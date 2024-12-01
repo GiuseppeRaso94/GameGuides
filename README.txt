@@ -1,3 +1,3 @@
 Node packages installed:
 
-express, mongoose, nodemon, dotenv, cors, multer, cloudinary, multer-storage-cloudinary
+express, mongoose, nodemon, dotenv, cors, multer, cloudinary, multer-storage-cloudinary, bootstrap, react-bootstrap
