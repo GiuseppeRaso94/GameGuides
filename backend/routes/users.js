@@ -1,54 +1,71 @@
 const express = require("express");
 const UsersModel = require("../models/UsersModel");
-const PostsModel = require("../models/PostsModel");
 const users = express.Router();
+const bcrypt = require("bcrypt");
 
-users.get("/users", async (request, response, next) => {
+users.get("/users", async (req, res, next) => {
   try {
     const users = await UsersModel.find().populate("posts");
     if (users.length === 0) {
-      return response.status(404).send({ message: "No users found" });
+      return res.status(404).send({ message: "No users found" });
     }
-    response.status(200).send({ statusCode: 200, users });
+    res.status(200).send({ statusCode: 200, users });
   } catch (e) {
-    response.status(500).send({ message: e.message });
+    res.status(500).send({ message: e.message });
   }
 });
 
-users.get("/users/:id", async (request, response, next) => {
+users.get("/users/:id", async (req, res, next) => {
   try {
-    const user = await UsersModel.findById(request.params.id).populate("posts");
+    const user = await UsersModel.findById(req.params.id).populate("posts");
     if (!user) {
-      return response.status(404).send({ message: "User not found" });
+      return res.status(404).send({ message: "User not found" });
     }
-    response.status(200).send({ statusCode: 200, user });
+    res.status(200).send({ statusCode: 200, user });
   } catch (e) {
-    response.status(500).send({ message: e.message });
+    res.status(500).send({ message: e.message });
   }
 });
 
-users.post("/users/create", async (request, response, next) => {
-  const newUser = new UsersModel(request.body);
+users.post("/users/create", async (req, res, next) => {
   try {
+    const newUser = new UsersModel(req.body);
     const userToSave = await newUser.save();
-    response
+    res
       .status(201)
       .send({ statusCode: 201, message: "User saved succesfully", userToSave });
   } catch (e) {
-    response.status(500).send({ message: e.message });
+    res.status(500).send({ message: e.message });
   }
 });
 
-users.patch("/users/update/:id", async (request, response, next) => {
-  const { id } = request.params;
-  const updatedUserData = request.body;
+users.patch("/users/update/:id", async (req, res, next) => {
   try {
-    const userExist = await UsersModel.findById(id);
-    if (!userExist) {
-      return response.status(404).send({
+    const { id } = req.params;
+    const userToUpdate = await UsersModel.findById(id);
+    if (!userToUpdate) {
+      return res.status(404).send({
         statusCode: 404,
         message: "No user found with the given id",
       });
+    }
+    let updatedUserData = { ...req.body };
+    if (updatedUserData.password) {
+      const isPasswordTheSame = await bcrypt.compare(
+        updatedUserData.password,
+        userToUpdate.password
+      );
+      if (isPasswordTheSame) {
+        const { password, ...dataExceptPassword } = updatedUserData;
+        updatedUserData = dataExceptPassword;
+      } else {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(
+          updatedUserData.password,
+          salt
+        );
+        updatedUserData = { ...updatedUserData, password: hashedPassword };
+      }
     }
     const options = { new: true };
     const result = await UsersModel.findByIdAndUpdate(
@@ -56,34 +73,34 @@ users.patch("/users/update/:id", async (request, response, next) => {
       updatedUserData,
       options
     );
-    response.status(200).send({
+    res.status(200).send({
       statusCode: 200,
       message: "User updated successfully",
       result,
     });
   } catch (e) {
-    response.status(500).send({ message: e.message });
+    res.status(500).send({ message: e.message });
   }
 });
 
-users.delete("/users/delete/:id", async (request, response, next) => {
-  const { id } = request.params;
+users.delete("/users/delete/:id", async (req, res, next) => {
   try {
-    const deletedUser = await UsersModel.findByIdAndDelete(id);
+    const { id } = req.params;
+    const deletedUser = await UsersModel.findOne({ _id: id });
+    await deletedUser.deleteOne();
     if (!deletedUser) {
-      return response.status(404).send({
+      return res.status(404).send({
         statusCode: 404,
         message: "No user found with the given id",
       });
     }
-    await PostsModel.deleteMany({ _id: { $in: deletedUser.posts } });
-    response.status(200).send({
+    res.status(200).send({
       statusCode: 200,
       message: "User deleted successfully",
       deletedUser,
     });
   } catch (e) {
-    response.status(500).send({ message: e.message });
+    res.status(500).send({ message: e.message });
   }
 });
 

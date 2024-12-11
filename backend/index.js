@@ -7,6 +7,7 @@ const usersRoute = require("./routes/users");
 const postsRoute = require("./routes/posts");
 const commentsRoute = require("./routes/comments");
 const loginRoute = require("./routes/login");
+const googleRoute = require("./routes/google");
 
 mongoose.connect(process.env.DB_URI);
 const db = mongoose.connection;
@@ -20,5 +21,6 @@ server.use(cors());
 server.use("/", usersRoute);
 server.use("/", postsRoute);
 server.use("/", commentsRoute);
-// server.use("/", loginRoute);
+server.use("/", loginRoute);
+server.use("/", googleRoute);
 server.listen(PORT, () => console.log(`Server up and running on port ${PORT}`));

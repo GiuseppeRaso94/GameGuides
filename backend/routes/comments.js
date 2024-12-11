@@ -4,34 +4,37 @@ const PostsModel = require("../models/PostsModel");
 const UsersModel = require("../models/UsersModel");
 const comments = express.Router();
 
-comments.get("/comments", async (request, response, next) => {
+comments.get("/comments", async (req, res, next) => {
   try {
-    const comments = await CommentsModel.find().populate("user comments");
+    const comments = await CommentsModel.find()
+      .sort({ createdAt: 1 })
+      .limit(10)
+      .populate("user comments");
     if (comments.length === 0) {
-      return response.status(404).send({ message: "No comments found" });
+      return res.status(404).send({ message: "No comments found" });
     }
-    response.status(200).send({ statusCode: 200, comments });
+    res.status(200).send({ statusCode: 200, comments });
   } catch (e) {
-    response.status(500).send({ message: e.message });
+    res.status(500).send({ message: e.message });
   }
 });
 
-comments.get("/comments/:id", async (request, response, next) => {
+comments.get("/comments/:id", async (req, res, next) => {
   try {
-    const comment = await CommentsModel.findById(request.params.id).populate(
+    const comment = await CommentsModel.findById(req.params.id).populate(
       "user comments"
     );
     if (!comment) {
-      return response.status(404).send({ message: "Comment not found" });
+      return res.status(404).send({ message: "Comment not found" });
     }
-    response.status(200).send({ statusCode: 200, comment });
+    res.status(200).send({ statusCode: 200, comment });
   } catch (e) {
-    response.status(500).send({ message: e.message });
+    res.status(500).send({ message: e.message });
   }
 });
 
-comments.post("/comments/create", async (request, response, next) => {
-  const { user, text, postParent, commentParent } = request.body;
+comments.post("/comments/create", async (req, res, next) => {
+  const { user, text, postParent, commentParent } = req.body;
   try {
     const userId = await UsersModel.findById(user);
     const postToUpdate = await PostsModel.findById(postParent);
@@ -41,7 +44,7 @@ comments.post("/comments/create", async (request, response, next) => {
       text,
     });
     if (!postToUpdate && !commentToUpdate) {
-      return response.status(404).send({
+      return res.status(404).send({
         statusCode: 404,
         message: "No parent was specified in the request or was not found",
       });
@@ -58,23 +61,23 @@ comments.post("/comments/create", async (request, response, next) => {
         { $push: { comments: savedComment } }
       );
     }
-    response.status(201).send({
+    res.status(201).send({
       statusCode: 201,
       message: "Comment saved successfully",
       savedComment,
     });
   } catch (e) {
-    response.status(500).send({ message: e.message });
+    res.status(500).send({ message: e.message });
   }
 });
 
-comments.patch("/comments/update/:id", async (request, response, next) => {
-  const { id } = request.params;
-  const updatedCommentData = request.body;
+comments.patch("/comments/update/:id", async (req, res, next) => {
+  const { id } = req.params;
+  const updatedCommentData = req.body;
   try {
     const commentExist = await CommentsModel.findById(id);
     if (!commentExist) {
-      return response.status(404).send({
+      return res.status(404).send({
         statusCode: 404,
         message: "No comment found with the given id",
       });
@@ -85,23 +88,24 @@ comments.patch("/comments/update/:id", async (request, response, next) => {
       updatedCommentData,
       options
     );
-    response.status(200).send({
+    res.status(200).send({
       statusCode: 200,
       message: "Comment updated successfully",
       result,
     });
   } catch (e) {
-    response.status(500).send({ message: e.message });
+    res.status(500).send({ message: e.message });
   }
 });
 
-comments.delete("/comments/delete/:id", async (request, response, next) => {
-  const { id } = request.params;
-  const { post, comment } = request.body;
+comments.delete("/comments/delete/:id", async (req, res, next) => {
+  const { id } = req.params;
+  const { post, comment } = req.body;
   try {
-    const deletedComment = await CommentsModel.findByIdAndDelete(id);
+    const deletedComment = await CommentsModel.findOne({ _id: id });
+    await deletedComment.deleteOne();
     if (!deletedComment) {
-      return response.status(404).send({
+      return res.status(404).send({
         statusCode: 404,
         message: "No comment found with the given id",
       });
@@ -114,13 +118,13 @@ comments.delete("/comments/delete/:id", async (request, response, next) => {
         { $pull: { comments: id } }
       );
     }
-    response.status(200).send({
+    res.status(200).send({
       statusCode: 200,
       message: "Comment deleted successfully",
       deletedComment,
     });
   } catch (e) {
-    response.status(500).send({ message: e.message });
+    res.status(500).send({ message: e.message });
   }
 });
 

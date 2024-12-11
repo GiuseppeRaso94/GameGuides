@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const PostsModel = require("./PostsModel");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -38,5 +39,22 @@ UserSchema.pre("save", async function (next) {
     next(e);
   }
 });
+
+UserSchema.pre(
+  "deleteOne",
+  { document: true, query: false },
+  async function (next) {
+    try {
+      this.posts.forEach((post) => {
+        PostsModel.findOne({ _id: post.toString() }).then((post) => {
+          post.deleteOne({ _id: post }).then();
+        });
+      });
+      next();
+    } catch (e) {
+      next(e);
+    }
+  }
+);
 
 module.exports = mongoose.model("usersModel", UserSchema, "users");
