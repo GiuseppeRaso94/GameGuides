@@ -1,5 +1,23 @@
-#sidebar {
-  border-right: 2px solid rgb(11, 243, 241);
+@media only screen and (min-width: 769px) {
+  #sidebar {
+    border: solid;
+    border-width: 2px;
+    border-top: 0;
+    border-left: 0;
+    border-bottom: 0;
+    border: linear-gradient(to bottom, rgb(245, 5, 254), rgb(11, 243, 241));
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #sidebar {
+    border: solid;
+    border-width: 2px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border: linear-gradient(to bottom, rgb(245, 5, 254), rgb(11, 243, 241));
+  }
 }
 
 #categories {
@@ -14,7 +32,7 @@ ul {
 }
 
 li {
-  width: 100%;
+  width: 200px;
   background-color: rgb(50, 26, 85);
   border-radius: 20px;
   text-align: center;
@@ -40,4 +58,11 @@ li label {
   height: 100%;
   width: 100%;
   border-radius: 20px;
+}
+
+#contacts {
+  font-family: "Games", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: rgb(245, 188, 176);
 }

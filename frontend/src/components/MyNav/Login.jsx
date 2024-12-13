@@ -1,5 +1,5 @@
-const Access = () => {
+const LogIn = () => {
   return <button id="logInButton">Login in</button>;
 };
 
-export default Access;
+export default LogIn;

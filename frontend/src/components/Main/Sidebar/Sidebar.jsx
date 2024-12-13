@@ -4,10 +4,10 @@ import "./Sidebar.css";
 
 const Sidebar = () => {
   return (
-    <div>
+    <>
       <Categories />
       <Footer />
-    </div>
+    </>
   );
 };
 

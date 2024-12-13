@@ -5,7 +5,7 @@
 
 #myNavbar {
   background-color: rgb(50, 26, 85);
-  border-bottom: 2px solid rgb(11, 243, 241);
+  border-bottom: 2px solid rgb(245, 5, 254);
 }
 
 #title {
@@ -57,6 +57,8 @@
 #logInButton:hover {
   background-color: rgb(245, 5, 254);
   transition: 0.4s;
+  box-shadow: 10px 0 30px -4px rgb(11, 243, 241),
+    -10px 0 30px -4px rgb(245, 5, 254);
 }
 
 #navBarToggler {

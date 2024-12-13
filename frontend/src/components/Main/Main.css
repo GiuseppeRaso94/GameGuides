@@ -1,9 +1,14 @@
 html {
-  height: 100vh;
+  height: 100%;
 }
 
 body {
-  height: 100vh;
+  height: 100%;
   background-color: rgb(50, 26, 85);
   color: rgb(245, 188, 176);
+}
+
+#allPosts {
+  height: 100%;
+  overflow-y: scroll;
 }
