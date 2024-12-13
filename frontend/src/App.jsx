@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoutes from "./middlewares/ProtectedRoutes.jsx";
 import HomePage from "./pages/HomePage.jsx";
+import PostCreation from "./pages/PostCreation.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
 
 function App() {
   return (

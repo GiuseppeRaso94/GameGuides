@@ -1,0 +1,43 @@
+#sidebar {
+  border-right: 2px solid rgb(11, 243, 241);
+}
+
+#categories {
+  font-family: "Games", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: rgb(245, 188, 176);
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  width: 100%;
+  background-color: rgb(50, 26, 85);
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: rgb(154, 85, 242);
+  transition: 0.4s;
+}
+
+li input {
+  visibility: hidden;
+  width: 0;
+}
+
+li input:checked + label {
+  background-color: rgb(245, 5, 254);
+  color: rgb(50, 26, 85);
+}
+
+li label {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+}

@@ -1,0 +1,9 @@
+html {
+  height: 100vh;
+}
+
+body {
+  height: 100vh;
+  background-color: rgb(50, 26, 85);
+  color: rgb(245, 188, 176);
+}

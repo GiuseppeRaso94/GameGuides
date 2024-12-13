@@ -1,0 +1,71 @@
+#logo {
+  max-height: 80px;
+  max-width: 80px;
+}
+
+#myNavbar {
+  background-color: rgb(50, 26, 85);
+  border-bottom: 2px solid rgb(11, 243, 241);
+}
+
+#title {
+  font-family: "Games", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: rgb(245, 188, 176);
+}
+
+#searchBar {
+  border: 2px solid rgb(11, 243, 241);
+  width: 300px;
+}
+
+#searchBar input {
+  background-color: rgb(50, 26, 85);
+  color: rgb(245, 188, 176);
+}
+
+#searchBar input {
+  outline: 0;
+}
+
+#searchBar input::placeholder {
+  color: rgb(245, 188, 176);
+}
+
+#searchBar button {
+  background-color: rgb(154, 85, 242);
+}
+
+#searchBar button:hover {
+  background-color: rgb(245, 5, 254);
+  transition: 0.4s;
+}
+
+#logInButton {
+  max-width: 140px;
+  padding: 0px 20px;
+  background-color: rgb(154, 85, 242);
+  border-radius: 20px;
+  border: 2px solid rgb(11, 243, 241);
+  font-family: "Games", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: rgb(245, 188, 176);
+}
+
+#logInButton:hover {
+  background-color: rgb(245, 5, 254);
+  transition: 0.4s;
+}
+
+#navBarToggler {
+  outline: 0;
+  background-color: rgb(154, 85, 242);
+  border: 2px solid rgb(11, 243, 241);
+}
+
+#navBarToggler:hover {
+  background-color: rgb(245, 5, 254);
+  transition: 0.4s;
+}

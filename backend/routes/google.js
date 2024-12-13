@@ -3,7 +3,7 @@ const session = require("express-session");
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const jwt = require("jsonwebtoken");
-require("dotenv").congif();
+require("dotenv").config();
 const mongoose = require("mongoose");
 const UserModel = require("../models/UsersModel");
 const google = express.Router();
