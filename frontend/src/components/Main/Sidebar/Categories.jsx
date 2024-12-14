@@ -6,7 +6,7 @@ const Categories = () => {
   return (
     <Navbar expand="lg" className="d-flex flex-column gap-3">
       <div className="d-flex justify-content-center align-items-center gap-3">
-        <span id="categories">Categories</span>
+        <span className="titles">Categories</span>
         <Navbar.Toggle
           aria-controls="basic-navbar-nav"
           bsPrefix="navbar-toggler"

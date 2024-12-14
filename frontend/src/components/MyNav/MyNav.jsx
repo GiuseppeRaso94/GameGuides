@@ -7,21 +7,17 @@ import SearchBar from "./SearchBar";
 
 const MyNav = () => {
   return (
-    <Navbar
-      className="py-0 px-lg-4 px-sm-0 d-flex gap-5"
-      expand="lg"
-      id="myNavbar"
-    >
+    <Navbar className="py-0 px-4 d-flex" expand="lg" id="myNavbar">
       <Navbar.Brand
         href="http://localhost:5173/homepage"
-        className="d-flex align-items-center gap-3"
+        className="d-flex align-items-center gap-3 m-0 me-5"
       >
         <img
           src="src/assets/GameGuidesLogo.png"
           alt="GameGuidesLogo"
           id="logo"
         />
-        <span id="title">Game Guides</span>
+        <span className="titles">Game Guides</span>
       </Navbar.Brand>
       <Navbar.Toggle
         aria-controls="basic-navbar-nav"
@@ -29,7 +25,7 @@ const MyNav = () => {
         id="navBarToggler"
       />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="w-100 d-flex justify-content-between pb-sm-3 pb-lg-0 align-items-center gap-3">
+        <Nav className="w-100 d-flex justify-content-between align-items-center gap-3">
           <SearchBar />
           <LogIn />
         </Nav>
