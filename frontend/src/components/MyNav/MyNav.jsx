@@ -12,11 +12,7 @@ const MyNav = () => {
         href="http://localhost:5173/homepage"
         className="d-flex align-items-center gap-3 m-0 me-5"
       >
-        <img
-          src="public\assets\GameGuidesLogo.png"
-          alt="GameGuidesLogo"
-          id="logo"
-        />
+        <img src="assets/GameGuidesLogo.png" alt="GameGuidesLogo" id="logo" />
         <span className="titles">Game Guides</span>
       </Navbar.Brand>
       <Navbar.Toggle
