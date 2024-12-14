@@ -7,13 +7,13 @@ import SearchBar from "./SearchBar";
 
 const MyNav = () => {
   return (
-    <Navbar className="py-0 px-4 d-flex" expand="lg" id="myNavbar">
+    <Navbar className="px-4 d-flex" expand="lg" id="myNavbar">
       <Navbar.Brand
         href="http://localhost:5173/homepage"
         className="d-flex align-items-center gap-3 m-0 me-5"
       >
         <img
-          src="src/assets/GameGuidesLogo.png"
+          src="public\assets\GameGuidesLogo.png"
           alt="GameGuidesLogo"
           id="logo"
         />

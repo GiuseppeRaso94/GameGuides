@@ -20,6 +20,25 @@
   }
 }
 
+#homeBtn {
+  width: 100%;
+  background-color: rgb(50, 26, 85);
+  border: none;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  color: rgb(245, 188, 176);
+}
+
+#homeBtn:hover {
+  background-color: rgb(154, 85, 242);
+  transition: 0.4s;
+}
+
+a {
+  text-decoration: none;
+}
+
 .titles {
   font-family: "Games", sans-serif;
   font-size: 1.5rem;
