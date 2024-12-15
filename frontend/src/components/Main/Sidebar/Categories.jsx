@@ -10,7 +10,7 @@ const Categories = () => {
         <Navbar.Toggle
           aria-controls="basic-navbar-nav"
           bsPrefix="navbar-toggler"
-          id="navBarToggler"
+          className="collapseBtns"
         />
       </div>
       <Navbar.Collapse id="basic-navbar-nav" className="w-100">

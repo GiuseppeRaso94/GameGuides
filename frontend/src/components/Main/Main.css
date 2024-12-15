@@ -1,14 +1,36 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 html {
-  height: 100%;
+  height: 100vh;
 }
 
 body {
-  height: 100%;
+  height: 100vh;
   background-color: rgb(50, 26, 85);
   color: rgb(245, 188, 176);
 }
 
-#allPosts {
+@media only screen and (min-width: 769px) {
+  #main {
+    flex: 1;
+  }
+}
+
+.postsSection {
   height: 100%;
   overflow-y: scroll;
+  background-position: center;
+  background-size: cover;
+  background-image: url(assets/Neon_Vice_City.jpg);
+}
+
+.singlePost {
+  background: linear-gradient(rgb(50, 26, 85), rgb(50, 26, 85)) padding-box,
+    linear-gradient(to bottom, rgb(11, 243, 241), rgb(245, 5, 254)) border-box;
+  border-radius: 40px;
+  border: 4px solid transparent;
 }

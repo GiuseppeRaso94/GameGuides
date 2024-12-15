@@ -18,7 +18,8 @@ const MyNav = () => {
       <Navbar.Toggle
         aria-controls="basic-navbar-nav"
         bsPrefix="navbar-toggler"
-        id="navBarToggler"
+        id="navbarToggler"
+        className="collapseBtns"
       />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="w-100 d-flex justify-content-between align-items-center gap-3">
