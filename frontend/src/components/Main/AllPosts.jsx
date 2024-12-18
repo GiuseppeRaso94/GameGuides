@@ -41,15 +41,17 @@ const AllPosts = () => {
               </SinglePost>
             ))
           ) : (
-            <Audio
-              height="100"
-              width="100"
-              radius="9"
-              color="rgb(11, 243, 241)"
-              ariaLabel="loading"
-              wrapperStyle
-              wrapperClass
-            />
+            <div className="singlePost w-100 p-3 d-flex justify-content-center align-content-center p-3">
+              <Audio
+                height="100"
+                width="100"
+                radius="9"
+                color="rgb(11, 243, 241)"
+                ariaLabel="loading"
+                wrapperStyle
+                wrapperClass
+              />
+            </div>
           )}
         </Col>
         <Col sm={0} lg={2}></Col>

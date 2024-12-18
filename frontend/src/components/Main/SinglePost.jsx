@@ -2,9 +2,8 @@ import { Link } from "react-router-dom";
 
 const SinglePost = ({ children, ...props }) => {
   const { post } = props;
-  console.log(post);
   return (
-    <Link to={`http://localhost:5173/posts/${post._id}`}>
+    <Link to={`${import.meta.env.VITE_FRONTEND_URL}/posts/${post._id}`}>
       <div className="singlePost p-3 d-flex flex-column gap-3">
         <span id="user" className="px-3">
           {post.user.userName}
