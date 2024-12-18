@@ -6,7 +6,7 @@ const Sidebar = () => {
   return (
     <>
       <div className="d-flex justify-content-center pb-3">
-        <a href={`${import.meta.env.VITE_FRONTEND_URL}`} className="w-100">
+        <a href="/" className="w-100">
           <button
             id="homeBtn"
             className="d-flex justify-content-center align-items-center gap-3"

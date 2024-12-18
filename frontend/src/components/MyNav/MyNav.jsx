@@ -9,7 +9,7 @@ const MyNav = () => {
   return (
     <Navbar className="px-4 d-flex" expand="lg" id="myNavbar">
       <Navbar.Brand
-        href={`${import.meta.env.VITE_FRONTEND_URL}`}
+        href="/"
         className="d-flex align-items-center gap-3 m-0 me-5"
       >
         <img src="/assets/GameGuidesLogo.png" alt="GameGuidesLogo" id="logo" />
