@@ -17,7 +17,10 @@ users.get("/users", async (req, res, next) => {
 
 users.get("/users/:id", async (req, res, next) => {
   try {
-    const user = await UsersModel.findById(req.params.id).populate("posts");
+    const user = await UsersModel.findById(req.params.id).populate({
+      path: "posts",
+      populate: { path: "user" },
+    });
     if (!user) {
       return res.status(404).send({ message: "User not found" });
     }
