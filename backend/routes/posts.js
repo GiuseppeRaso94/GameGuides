@@ -54,9 +54,27 @@ posts.get("/posts", async (req, res, next) => {
 
 posts.get("/posts/:id", async (req, res, next) => {
   try {
-    const post = await PostsModel.findById(req.params.id).populate(
-      "user comments"
-    );
+    const populateCommentsRecursively = async (comment) => {
+      await comment.populate({
+        path: "comments",
+        populate: { path: "user" },
+      });
+      for (const childComment of comment.comments) {
+        await populateCommentsRecursively(childComment);
+      }
+    };
+
+    const post = await PostsModel.findById(req.params.id)
+      .populate({
+        path: "comments",
+        populate: { path: "user" },
+      })
+      .populate("user");
+
+    for (const comment of post.comments) {
+      await populateCommentsRecursively(comment);
+    }
+
     if (!post) {
       return res.status(404).send({ message: "Post not found" });
     }

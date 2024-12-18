@@ -11,7 +11,7 @@ const Sidebar = () => {
             id="homeBtn"
             className="d-flex justify-content-center align-items-center gap-3"
           >
-            <img src="assets/home.svg" alt="homeIcon" />
+            <img src="/assets/home.svg" alt="homeIcon" />
             Homepage
           </button>
         </a>

@@ -79,6 +79,10 @@ li label {
   border-radius: 20px;
 }
 
+li label:hover {
+  cursor: pointer;
+}
+
 #email {
   word-break: break-all;
   overflow-wrap: break-word;

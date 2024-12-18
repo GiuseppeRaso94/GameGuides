@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/esm/Col";
+import Container from "react-bootstrap/esm/Container";
+import Row from "react-bootstrap/esm/Row";
 import { Audio } from "react-loader-spinner";
+import { useParams } from "react-router-dom";
+import CommentsArea from "./CommentsArea";
 import SinglePost from "./SinglePost";
 
-const AllPosts = () => {
-  const [posts, setPosts] = useState([]);
+const SinglePostArea = () => {
+  const { postId } = useParams();
+  const [post, setPost] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
-  const getPosts = async () => {
+  const getPost = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/posts`);
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/posts/${postId}`
+      );
       const data = await response.json();
-      setPosts(data.posts);
+      setPost(data.post);
       setIsLoading(false);
     } catch (e) {
       console.log(e.message);
@@ -21,7 +26,7 @@ const AllPosts = () => {
   };
 
   useEffect(() => {
-    getPosts();
+    getPost();
   }, []);
 
   return (
@@ -30,16 +35,9 @@ const AllPosts = () => {
         <Col sm={0} lg={2}></Col>
         <Col sm={12} lg={8} className="d-flex flex-column gap-5">
           {!isLoading ? (
-            posts.map((post) => (
-              <SinglePost key={post._id} post={post}>
-                <div className="px-3 d-flex flex-column">
-                  <button className="commentsBtn d-flex justify-content-center align-items-center gap-3">
-                    <img src="assets/comments.svg" alt="Comments Icon" />
-                    {post.comments.length}
-                  </button>
-                </div>
-              </SinglePost>
-            ))
+            <SinglePost post={post}>
+              <CommentsArea comments={post.comments} />
+            </SinglePost>
           ) : (
             <Audio
               height="100"
@@ -58,4 +56,4 @@ const AllPosts = () => {
   );
 };
 
-export default AllPosts;
+export default SinglePostArea;
