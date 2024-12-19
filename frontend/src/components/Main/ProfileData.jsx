@@ -145,7 +145,7 @@ const ProfileData = ({ user }) => {
             setAddPostModalShow(true);
           }}
         >
-          <img src="/assets/add.svg" alt="Add Post Icon" />
+          <img src="/add.svg" alt="Add Post Icon" />
           Add Post
         </button>
         <AddPostModal

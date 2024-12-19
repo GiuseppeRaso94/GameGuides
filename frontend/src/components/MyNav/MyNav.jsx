@@ -13,7 +13,7 @@ const MyNav = () => {
         href="/"
         className="d-flex align-items-center gap-3 m-0 me-5"
       >
-        <img src="/assets/GameGuidesLogo.png" alt="GameGuidesLogo" id="logo" />
+        <img src="/GameGuidesLogo.png" alt="GameGuidesLogo" id="logo" />
         <span className="titles">Game Guides</span>
       </Navbar.Brand>
       <Navbar.Toggle
@@ -28,7 +28,7 @@ const MyNav = () => {
           <LogIn />
           <Link to={`/user-profile/${"675f3c7d4704f269153e3936"}`}>
             <button id="userIcon">
-              <img src="/assets/user.svg" alt="User Icon" />
+              <img src="/user.svg" alt="User Icon" />
             </button>
           </Link>
         </Nav>

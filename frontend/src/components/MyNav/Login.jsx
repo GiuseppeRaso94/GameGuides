@@ -52,7 +52,7 @@ function RegisterModal(props) {
 }
 
 function LogInModal(props) {
-  const { registerModalShow, setRegisterModalShow, setLogInModalShow } = props;
+  const { setRegisterModalShow, setLogInModalShow } = props;
   return (
     <Modal
       {...props}
@@ -65,7 +65,7 @@ function LogInModal(props) {
       </Modal.Header>
       <Modal.Body className="px-4 py-4 d-flex flex-column align-items-center gap-3">
         <button id="logInGoogle" className="d-flex align-items-center gap-1">
-          <img src="/assets/google_logo.png" alt="Google Logo" />
+          <img src="/google_logo.png" alt="Google Logo" />
           Login with Google
         </button>
         <div className="divider w-100"></div>
@@ -102,6 +102,7 @@ function LogInModal(props) {
 const LogIn = () => {
   const [logInModalShow, setLogInModalShow] = useState(false);
   const [registerModalShow, setRegisterModalShow] = useState(false);
+
   return (
     <>
       <button

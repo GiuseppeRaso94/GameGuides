@@ -7,7 +7,7 @@ const SearchBar = () => {
         className="border border-0 w-100"
       />
       <button type="submit" className="border border-0">
-        <img src="/assets/search.svg" alt="" />
+        <img src="/search.svg" alt="" />
       </button>
     </form>
   );

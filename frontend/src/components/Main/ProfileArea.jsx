@@ -76,7 +76,7 @@ const ProfileArea = () => {
                 <SinglePost key={post._id} post={post}>
                   <div className="d-flex justify-content-between align-items-center px-3">
                     <button className="ovalButtons d-flex justify-content-center align-items-center gap-2">
-                      <img src="/assets/comments.svg" alt="Comments Icon" />
+                      <img src="/comments.svg" alt="Comments Icon" />
                       {post.comments.length}
                     </button>
                   </div>

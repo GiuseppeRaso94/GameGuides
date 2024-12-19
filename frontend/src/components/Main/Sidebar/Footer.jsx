@@ -16,12 +16,12 @@ const Footer = () => {
       <Navbar.Collapse id="basic-navbar-nav" className="w-100">
         <Nav className="w-100 d-flex flex-column align-items-center gap-3">
           <span className="m-0 d-flex gap-3">
-            <img src="/assets/mail.svg" alt="mailIcon" />
+            <img src="/mail.svg" alt="mailIcon" />
             E-mail:
           </span>
           <span className="m-0 newLine">peppone2894@gmail.com</span>
           <span className="m-0 d-flex gap-3">
-            <img src="/assets/phone.svg" alt="phoneIcon" />
+            <img src="/phone.svg" alt="phoneIcon" />
             Phone Number:
           </span>
           <span className="m-0">3289510340</span>

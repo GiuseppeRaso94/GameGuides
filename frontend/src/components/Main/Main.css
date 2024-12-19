@@ -25,7 +25,7 @@ body {
   overflow-y: scroll;
   background-position: center;
   background-size: cover;
-  background-image: url(Neon_Vice_City.jpg);
+  background-image: url("../../../public/Neon_Vice_City.jpg");
 }
 
 .singlePost {

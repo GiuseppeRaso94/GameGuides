@@ -163,14 +163,14 @@
 
 .btn-close {
   --bs-btn-close-color: rgb(11, 243, 241);
-  --bs-btn-close-bg: url(close_button.svg);
+  --bs-btn-close-bg: url("../../../public/close_button.svg");
   border: 2px solid rgb(11, 243, 241);
   border-radius: 100%;
   background-color: rgb(154, 85, 242);
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-  background-image: url(calendar.svg);
+  background-image: url("../../../public/calendar.svg");
 }
 
 .select {

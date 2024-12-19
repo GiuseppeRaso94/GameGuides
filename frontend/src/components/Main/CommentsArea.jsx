@@ -11,7 +11,7 @@ const CommentsArea = ({ comments }) => {
           className="border border-0 w-100"
         />
         <button type="submit" className="border border-0">
-          <img src="/assets/add.svg" alt="" />
+          <img src="/add.svg" alt="" />
         </button>
       </form>
       {comments.map((comment) => (
