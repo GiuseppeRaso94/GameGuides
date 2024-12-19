@@ -3,8 +3,26 @@ const CommentsModel = require("./CommentsModel");
 const PostSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "usersModel" },
+    title: { type: String, required: true },
     img: { type: String, required: true },
     description: { type: String, required: true },
+    tag: {
+      type: String,
+      enum: [
+        "adventure",
+        "rpg",
+        "mmorpg",
+        "moba",
+        "rts",
+        "fps",
+        "fighting",
+        "survival",
+        "sandbox",
+        "horror",
+      ],
+      default: "adventure",
+      required: true,
+    },
     comments: [
       {
         type: mongoose.Schema.Types.ObjectId,

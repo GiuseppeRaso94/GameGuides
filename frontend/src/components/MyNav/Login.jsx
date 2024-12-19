@@ -85,8 +85,7 @@ function LogInModal(props) {
         <div className="d-flex align-items-center gap-3">
           You have not an account yet?{" "}
           <button
-            className="px-3"
-            id="registerBtn"
+            className="ovalButtons"
             onClick={() => {
               setLogInModalShow(false);
               setRegisterModalShow(true);

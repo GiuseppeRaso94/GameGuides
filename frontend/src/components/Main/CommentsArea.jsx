@@ -1,9 +1,13 @@
 import SingleComment from "./SingleComment";
 
 const CommentsArea = ({ comments }) => {
-  return comments.map((comment) => (
-    <SingleComment key={comment._id} comment={comment} />
-  ));
+  return (
+    <div className="d-flex flex-column">
+      {comments.map((comment) => (
+        <SingleComment key={comment._id} comment={comment} />
+      ))}
+    </div>
+  );
 };
 
 export default CommentsArea;

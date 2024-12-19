@@ -25,15 +25,15 @@ const AllPosts = () => {
   }, []);
 
   return (
-    <Container fluid className="mainSection py-5">
+    <Container fluid className="mainSections py-5">
       <Row>
         <Col sm={0} lg={2}></Col>
         <Col sm={12} lg={8} className="d-flex flex-column gap-5">
           {!isLoading ? (
             posts.map((post) => (
               <SinglePost key={post._id} post={post}>
-                <div className="px-3 d-flex flex-column">
-                  <button className="commentsBtn d-flex justify-content-center align-items-center gap-3">
+                <div className="px-3">
+                  <button className="ovalButtons d-flex justify-content-center align-items-center gap-2">
                     <img src="assets/comments.svg" alt="Comments Icon" />
                     {post.comments.length}
                   </button>

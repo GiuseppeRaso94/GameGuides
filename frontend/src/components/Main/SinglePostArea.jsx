@@ -36,6 +36,10 @@ const SinglePostArea = () => {
         <Col sm={12} lg={8} className="d-flex flex-column gap-5">
           {!isLoading ? (
             <SinglePost post={post}>
+              <span className="divider pb-3 px-3">{post.description}</span>
+              <span className="bolder divider w-100 text-center py-3">
+                Comments
+              </span>
               <CommentsArea comments={post.comments} />
             </SinglePost>
           ) : (

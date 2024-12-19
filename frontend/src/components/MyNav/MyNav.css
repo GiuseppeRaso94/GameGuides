@@ -25,7 +25,6 @@
 }
 
 #searchBar {
-  width: 100%;
   border-image: linear-gradient(to right, rgb(245, 5, 254), rgb(11, 243, 241)) 1;
   border-width: 2px;
   border-style: solid;
@@ -168,17 +167,6 @@
   border: 2px solid rgb(11, 243, 241);
   border-radius: 100%;
   background-color: rgb(154, 85, 242);
-}
-
-#registerBtn {
-  border: none;
-  border-radius: 20px;
-  background-color: rgb(154, 85, 242);
-  color: rgb(245, 188, 176);
-}
-
-#registerBtn:hover {
-  background-color: rgb(245, 5, 254);
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {

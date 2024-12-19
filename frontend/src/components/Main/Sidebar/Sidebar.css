@@ -83,7 +83,7 @@ li label:hover {
   cursor: pointer;
 }
 
-#email {
+.newLine {
   word-break: break-all;
   overflow-wrap: break-word;
 }

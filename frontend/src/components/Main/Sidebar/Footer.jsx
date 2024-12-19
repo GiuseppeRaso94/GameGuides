@@ -19,9 +19,7 @@ const Footer = () => {
             <img src="/assets/mail.svg" alt="mailIcon" />
             E-mail:
           </span>
-          <span className="m-0" id="email">
-            peppone2894@gmail.com
-          </span>
+          <span className="m-0 newLine">peppone2894@gmail.com</span>
           <span className="m-0 d-flex gap-3">
             <img src="/assets/phone.svg" alt="phoneIcon" />
             Phone Number:

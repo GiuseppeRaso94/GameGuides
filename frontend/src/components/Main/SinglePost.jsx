@@ -5,12 +5,13 @@ const SinglePost = ({ children, ...props }) => {
   return (
     <Link to={`/posts/${post._id}`}>
       <div className="singlePost p-3 d-flex flex-column gap-3">
-        <span id="user" className="px-3">
-          {post.user.userName}
-        </span>
-        <span className="px-3">{post.description}</span>
+        <div className="d-flex justify-content-between">
+          <span className="px-3 bolder">{post.user.userName}</span>
+          <span className="oval">{post.tag}</span>
+        </div>
+        <span className="px-3">{post.title}</span>
         <img id="postImg" src={`${post.img}`} alt="Post Image" />
-        <div className="pe-3">{children}</div>
+        <div className="d-flex flex-column">{children}</div>
       </div>
     </Link>
   );
