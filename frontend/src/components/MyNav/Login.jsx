@@ -53,6 +53,41 @@ function RegisterModal(props) {
 
 function LogInModal(props) {
   const { setRegisterModalShow, setLogInModalShow } = props;
+  const [logInData, setLogInData] = useState({});
+
+  const onChangeInput = (e) => {
+    const { name, value } = e.target;
+    setLogInData({
+      ...logInData,
+      [name]: value,
+    });
+  };
+
+  const postLogInRequest = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(logInData),
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        localStorage.setItem("auth", JSON.stringify(data.token));
+      }
+      return response;
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await postLogInRequest();
+  };
+
   return (
     <Modal
       {...props}
@@ -69,16 +104,25 @@ function LogInModal(props) {
           Login with Google
         </button>
         <div className="divider w-100"></div>
+        or
         <form
           action=""
           className="w-100 d-flex flex-column align-items-center gap-3"
+          onSubmit={onSubmit}
         >
-          or
-          <input type="text" placeholder="E-mail" className="modal-input p-3" />
+          <input
+            type="email"
+            name="email"
+            placeholder="E-mail"
+            className="modal-input p-3"
+            onChange={onChangeInput}
+          />
           <input
             type="text"
+            name="password"
             placeholder="Password"
             className="modal-input p-3"
+            onChange={onChangeInput}
           />
           <button className="logInButton">Login</button>
         </form>

@@ -1,7 +1,7 @@
-const { useAuth } = require("../middlewares/ProtectedRoutes");
 import { jwtDecode } from "jwt-decode";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../middlewares/ProtectedRoutes";
 
 const useSession = () => {
   const session = useAuth();

@@ -30,7 +30,7 @@ const SinglePostArea = () => {
   }, []);
 
   return (
-    <Container fluid className="mainSection py-5">
+    <Container fluid className="mainSections py-5">
       <Row>
         <Col sm={0} lg={2}></Col>
         <Col sm={12} lg={8} className="d-flex flex-column gap-5">

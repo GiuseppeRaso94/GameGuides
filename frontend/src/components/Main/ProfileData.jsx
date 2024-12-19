@@ -4,9 +4,12 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Modal from "react-bootstrap/Modal";
 
 function OptionsDropDown({ setEditUserModalShow }) {
-  const start = "start";
+  const logOut = () => {
+    localStorage.removeItem("auth");
+  };
+
   return (
-    <DropdownButton drop={start}>
+    <DropdownButton drop={"start"}>
       <Dropdown.Item
         eventKey="1"
         onClick={() => {
@@ -16,7 +19,9 @@ function OptionsDropDown({ setEditUserModalShow }) {
         Edit Profile
       </Dropdown.Item>
       <Dropdown.Item eventKey="2">Delete Account</Dropdown.Item>
-      <Dropdown.Item eventKey="3">Log Out</Dropdown.Item>
+      <Dropdown.Item eventKey="3" onClick={logOut}>
+        Log Out
+      </Dropdown.Item>
     </DropdownButton>
   );
 }
