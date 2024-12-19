@@ -6,6 +6,7 @@ import Modal from "react-bootstrap/Modal";
 function OptionsDropDown({ setEditUserModalShow }) {
   const logOut = () => {
     localStorage.removeItem("auth");
+    location.reload();
   };
 
   return (
@@ -60,12 +61,6 @@ function EditUserModal(props) {
             <option value="user">User</option>
             <option value="admin">Admin</option>
           </select>
-          <div className="w-100">Date of birth</div>
-          <input
-            type="date"
-            placeholder="Date of birth"
-            className="modal-input p-3"
-          />
           <button className="logInButton">Save</button>
         </form>
       </Modal.Body>

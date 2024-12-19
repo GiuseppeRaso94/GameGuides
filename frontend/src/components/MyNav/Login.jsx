@@ -1,7 +1,54 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import Swal from "sweetalert2";
 
 function RegisterModal(props) {
+  const { setRegisterModalShow } = props;
+  const [newUserData, setNewUserData] = useState({});
+  const onChangeInput = (e) => {
+    const { name, value } = e.target;
+    setNewUserData({
+      ...newUserData,
+      [name]: value,
+    });
+  };
+
+  const userCreateRequest = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/users/create`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newUserData),
+        }
+      );
+      return response;
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const res = await userCreateRequest();
+    if (res.status === 201) {
+      Swal.fire({
+        title: "Registration completed! Please try to log in now",
+        icon: "success",
+        draggable: true,
+      });
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "You have not entered all the required fields",
+      });
+    }
+    setRegisterModalShow(false);
+  };
   return (
     <Modal
       {...props}
@@ -16,34 +63,40 @@ function RegisterModal(props) {
         <form
           action=""
           className="w-100 d-flex flex-column align-items-center gap-3"
+          onSubmit={onSubmit}
         >
           <div className="w-100">All fields with * are required</div>
           <input
             type="text"
             placeholder="* E-mail"
+            name="email"
             className="modal-input p-3"
+            onChange={onChangeInput}
           />
           <input
             type="text"
             placeholder="* Username"
+            name="userName"
             className="modal-input p-3"
+            onChange={onChangeInput}
           />
           <input
             type="text"
             placeholder="* Password"
+            name="password"
             className="modal-input p-3"
+            onChange={onChangeInput}
           />
           <div className="w-100">Role</div>
-          <select placeholder="Role" className="w-100 p-3 select">
+          <select
+            placeholder="Role"
+            className="w-100 p-3 select"
+            name="role"
+            onChange={onChangeInput}
+          >
             <option value="user">User</option>
             <option value="admin">Admin</option>
           </select>
-          <div className="w-100">Date of birth</div>
-          <input
-            type="date"
-            placeholder="Date of birth"
-            className="modal-input p-3"
-          />
           <button className="logInButton">Register</button>
         </form>
       </Modal.Body>
@@ -85,7 +138,23 @@ function LogInModal(props) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await postLogInRequest();
+    const res = await postLogInRequest();
+    if (res.status === 200) {
+      Swal.fire({
+        title: "Log In successfully!",
+        icon: "success",
+        draggable: true,
+      });
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Email or password are wrong!",
+      });
+    }
+    setLogInModalShow(false);
   };
 
   return (
@@ -164,6 +233,7 @@ const LogIn = () => {
       <RegisterModal
         show={registerModalShow}
         onHide={() => setRegisterModalShow(false)}
+        setRegisterModalShow={setRegisterModalShow}
       />
     </>
   );
