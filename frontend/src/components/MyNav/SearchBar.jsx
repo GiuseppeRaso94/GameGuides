@@ -1,6 +1,6 @@
 const SearchBar = () => {
   return (
-    <form className="w-100 d-flex align-items-center" id="searchBar">
+    <form className="barToRight w-100 d-flex align-items-center">
       <input
         type="text"
         placeholder="Search here"

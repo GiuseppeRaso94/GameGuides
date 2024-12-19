@@ -24,29 +24,29 @@
   color: rgb(245, 188, 176);
 }
 
-#searchBar {
+.barToRight {
   border-image: linear-gradient(to right, rgb(245, 5, 254), rgb(11, 243, 241)) 1;
   border-width: 2px;
   border-style: solid;
 }
 
-#searchBar input {
+.barToRight input {
   padding-left: 20px;
-  background-color: rgb(50, 26, 85);
+  background-color: transparent;
   color: rgb(245, 188, 176);
   outline: 0;
 }
 
-#searchBar input::placeholder {
+.barToRight input::placeholder {
   color: rgb(245, 188, 176);
 }
 
-#searchBar button {
+.barToRight button {
   padding: 10px;
   background-color: rgb(154, 85, 242);
 }
 
-#searchBar button:hover {
+.barToRight button:hover {
   background-color: rgb(245, 5, 254);
   transition: 0.4s;
 }
@@ -182,4 +182,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .select option {
   background-color: rgb(50, 26, 85);
+}
+
+#userIcon {
+  padding: 12px;
+  border: none;
+  border-radius: 100%;
+  background-color: rgb(154, 85, 242);
+}
+
+#userIcon:hover {
+  background-color: rgb(245, 5, 254);
+  transition: 0.4s;
+  box-shadow: 4px 0 30px -4px rgb(11, 243, 241),
+    -4px 0 30px -4px rgb(245, 5, 254);
 }

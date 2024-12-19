@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 import LogIn from "./Login";
 import "./MyNav.css";
 import SearchBar from "./SearchBar";
@@ -25,6 +26,11 @@ const MyNav = () => {
         <Nav className="w-100 d-flex justify-content-between align-items-center gap-3">
           <SearchBar />
           <LogIn />
+          <Link to={`/user-profile/${"675f3c7d4704f269153e3936"}`}>
+            <button id="userIcon">
+              <img src="/assets/user.svg" alt="User Icon" />
+            </button>
+          </Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

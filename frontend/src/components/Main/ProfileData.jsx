@@ -1,5 +1,25 @@
 import { useState } from "react";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 import Modal from "react-bootstrap/Modal";
+
+function OptionsDropDown({ setEditUserModalShow }) {
+  const start = "start";
+  return (
+    <DropdownButton drop={start}>
+      <Dropdown.Item
+        eventKey="1"
+        onClick={() => {
+          setEditUserModalShow(true);
+        }}
+      >
+        Edit Profile
+      </Dropdown.Item>
+      <Dropdown.Item eventKey="2">Delete Account</Dropdown.Item>
+      <Dropdown.Item eventKey="3">Log Out</Dropdown.Item>
+    </DropdownButton>
+  );
+}
 
 function EditUserModal(props) {
   return (
@@ -96,14 +116,7 @@ const ProfileData = ({ user }) => {
     <div id="profile" className="py-3 px-md-5 px-3 d-flex flex-column gap-3">
       <div className="d-flex justify-content-between">
         <span className="titles">{user.userName}</span>
-        <button
-          className="circleButtons p-2"
-          onClick={() => {
-            setEditUserModalShow(true);
-          }}
-        >
-          <img src="/assets/edit.svg" alt="Options Icon" />
-        </button>
+        <OptionsDropDown setEditUserModalShow={setEditUserModalShow} />
         <EditUserModal
           show={editUserModalShow}
           onHide={() => setEditUserModalShow(false)}

@@ -21,6 +21,7 @@ body {
 }
 
 .mainSections {
+  height: 100%;
   overflow-y: scroll;
   background-position: center;
   background-size: cover;
@@ -42,6 +43,7 @@ body {
   background: linear-gradient(rgb(64, 34, 109), rgb(64, 34, 109)) padding-box,
     linear-gradient(to bottom, rgb(11, 243, 241), rgb(245, 5, 254)) border-box;
   cursor: pointer;
+  transition: 0.4s;
 }
 
 #postImg {
@@ -63,6 +65,7 @@ body {
 
 .ovalButtons:hover {
   background-color: rgb(245, 5, 254);
+  transition: 0.4s;
 }
 
 #profile {
@@ -77,11 +80,52 @@ body {
 }
 
 .circleButtons {
+  height: 40px;
+  width: 40px;
+  padding: 8px;
   border: none;
   border-radius: 100%;
   background-color: rgb(154, 85, 242);
 }
 
 .circleButtons:hover {
+  background-color: rgb(245, 5, 254);
+  transition: 0.4s;
+}
+
+.tag {
+  padding: 4px 16px;
+  border: none;
+  border-radius: 40px;
+  background-color: rgb(245, 5, 254);
+  color: rgb(50, 26, 85);
+}
+
+.dropdown-toggle {
+  height: 40px;
+  width: 40px;
+  border: none;
+  border-radius: 100%;
+  background-color: rgb(154, 85, 242);
+}
+
+.dropdown-toggle:focus {
+  background-color: rgb(154, 85, 242);
+}
+
+.dropdown-toggle:hover {
+  background-color: rgb(245, 5, 254);
+  transition: 0.4s;
+}
+
+.dropdown-menu {
+  background-color: rgb(154, 85, 242);
+}
+
+.dropdown-item:hover {
+  background-color: rgb(245, 5, 254);
+}
+
+.dropdown-item:active {
   background-color: rgb(245, 5, 254);
 }
