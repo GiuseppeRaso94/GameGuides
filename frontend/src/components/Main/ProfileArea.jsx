@@ -3,17 +3,76 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import Modal from "react-bootstrap/Modal";
 import Row from "react-bootstrap/Row";
 import { Audio } from "react-loader-spinner";
 import { useParams } from "react-router-dom";
 import ProfileData from "./ProfileData";
 import SinglePost from "./SinglePost";
 
-function OptionsDropDown({ setEditUserModalShow }) {
+const EditPostModal = (props) => {
+  const { setEditPostModalShow } = props;
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton className="px-4 py-4">
+        <Modal.Title id="contained-modal-title-vcenter">Edit post</Modal.Title>
+      </Modal.Header>
+      <Modal.Body className="px-4 py-4 d-flex flex-column align-items-center gap-3">
+        <form
+          action=""
+          className="w-100 d-flex flex-column align-items-center gap-3"
+          encType="multipart/form-data"
+        >
+          <input
+            type="text"
+            className="modal-input p-3"
+            placeholder="Title"
+            name="title"
+          />
+          <input type="file" className="modal-input p-3" name="img" />
+          <textarea
+            placeholder="Description"
+            className="modal-input p-3"
+            name="description"
+          />
+          <div className="w-100">Tag (Genre)</div>
+          <select className="w-100 p-3 select" name="tag">
+            <option value="adventure">Adventure</option>
+            <option value="rpg">RPG</option>
+            <option value="mmorpg">MMORPG</option>
+            <option value="moba">MOBA</option>
+            <option value="rts">RTS</option>
+            <option value="fps">FPS</option>
+            <option value="fighting">Fighting</option>
+            <option value="survival">Survival</option>
+            <option value="sandbox">Sandbox</option>
+            <option value="horror">Horror</option>
+          </select>
+          <button className="logInButton">Save</button>
+        </form>
+      </Modal.Body>
+    </Modal>
+  );
+};
+
+function OptionsDropDown() {
   const start = "start";
+  const [editPostModalShow, setEditPostModalShow] = useState();
   return (
     <DropdownButton drop={start}>
-      <Dropdown.Item eventKey="1">Edit Post</Dropdown.Item>
+      <Dropdown.Item eventKey="1" onClick={() => setEditPostModalShow(true)}>
+        Edit Post
+      </Dropdown.Item>
+      <EditPostModal
+        show={editPostModalShow}
+        onHide={() => setEditPostModalShow(false)}
+        setEditPostModalShow={setEditPostModalShow}
+      />
       <Dropdown.Item eventKey="2">Delete Post</Dropdown.Item>
     </DropdownButton>
   );

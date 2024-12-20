@@ -22,7 +22,6 @@ body {
 
 .mainSections {
   height: 100%;
-  overflow-y: scroll;
   background-position: center;
   background-size: cover;
   background-image: url("../../../public/Neon_Vice_City.jpg");
