@@ -2,6 +2,8 @@ import { useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Modal from "react-bootstrap/Modal";
+import Swal from "sweetalert2";
+import useSession from "../../hooks/useSession";
 
 function OptionsDropDown({ setEditUserModalShow }) {
   const logOut = () => {
@@ -69,6 +71,82 @@ function EditUserModal(props) {
 }
 
 function AddPostModal(props) {
+  const session = useSession();
+  const { setAddPostModalShow } = props;
+  const [newPostData, setNewPostData] = useState({});
+  const [file, setFile] = useState();
+
+  const onChangeFile = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const onChangeInput = (e) => {
+    const { name, value } = e.target;
+    setNewPostData({
+      ...newPostData,
+      [name]: value,
+    });
+  };
+
+  const uploadRequest = async (file) => {
+    const fileData = new FormData();
+    fileData.append("img", file);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/posts/upload/cloud`,
+        {
+          method: "POST",
+          body: fileData,
+        }
+      );
+      return await response.json();
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (file) {
+      try {
+        const uploadedFile = await uploadRequest(file);
+        const postFormData = {
+          ...newPostData,
+          img: uploadedFile.img,
+          user: session._id,
+        };
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/posts/create`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(postFormData),
+          }
+        );
+        if (response.status === 201) {
+          Swal.fire({
+            title: "Post created successfully!",
+            icon: "success",
+            draggable: true,
+          });
+          setTimeout(() => {
+            location.reload();
+          }, 2000);
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops something went wrong!",
+          });
+        }
+        setAddPostModalShow(false);
+      } catch (e) {
+        console.log(e.message);
+      }
+    }
+  };
+
   return (
     <Modal
       {...props}
@@ -85,12 +163,34 @@ function AddPostModal(props) {
         <form
           action=""
           className="w-100 d-flex flex-column align-items-center gap-3"
+          onSubmit={onSubmit}
+          encType="multipart/form-data"
         >
-          <input type="text" className="modal-input p-3" placeholder="Title" />
-          <input type="file" className="modal-input p-3" />
-          <textarea placeholder="Description" className="modal-input p-3" />
+          <input
+            type="text"
+            className="modal-input p-3"
+            placeholder="Title"
+            name="title"
+            onChange={onChangeInput}
+          />
+          <input
+            type="file"
+            className="modal-input p-3"
+            name="img"
+            onChange={onChangeFile}
+          />
+          <textarea
+            placeholder="Description"
+            className="modal-input p-3"
+            name="description"
+            onChange={onChangeInput}
+          />
           <div className="w-100">Tag (Genre)</div>
-          <select className="w-100 p-3 select">
+          <select
+            className="w-100 p-3 select"
+            name="tag"
+            onChange={onChangeInput}
+          >
             <option value="adventure">Adventure</option>
             <option value="rpg">RPG</option>
             <option value="mmorpg">MMORPG</option>
@@ -120,6 +220,7 @@ const ProfileData = ({ user }) => {
         <EditUserModal
           show={editUserModalShow}
           onHide={() => setEditUserModalShow(false)}
+          setEditUserModalShow={setEditUserModalShow}
         />
       </div>
       <div className="d-flex gap-3">
@@ -151,6 +252,7 @@ const ProfileData = ({ user }) => {
         <AddPostModal
           show={addPostModalShow}
           onHide={() => setAddPostModalShow(false)}
+          setAddPostModalShow={setAddPostModalShow}
         />
       </div>
     </div>
