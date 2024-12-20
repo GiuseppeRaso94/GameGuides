@@ -7,6 +7,8 @@ import Modal from "react-bootstrap/Modal";
 import Row from "react-bootstrap/Row";
 import { Audio } from "react-loader-spinner";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
+import useSession from "../../hooks/useSession";
 import ProfileData from "./ProfileData";
 import SinglePost from "./SinglePost";
 
@@ -60,9 +62,44 @@ const EditPostModal = (props) => {
   );
 };
 
-function OptionsDropDown() {
+function OptionsDropDown({ post }) {
   const start = "start";
   const [editPostModalShow, setEditPostModalShow] = useState();
+
+  const deletePost = async () => {
+    try {
+      const session = useSession();
+      const userToUpdate = { user: session._id };
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/posts/delete/${post._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userToUpdate),
+        }
+      );
+      if (response.status === 200) {
+        Swal.fire({
+          title: "Post deleted successfully!",
+          icon: "success",
+          draggable: true,
+        });
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops something went wrong!",
+        });
+      }
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
   return (
     <DropdownButton drop={start}>
       <Dropdown.Item eventKey="1" onClick={() => setEditPostModalShow(true)}>
@@ -73,7 +110,9 @@ function OptionsDropDown() {
         onHide={() => setEditPostModalShow(false)}
         setEditPostModalShow={setEditPostModalShow}
       />
-      <Dropdown.Item eventKey="2">Delete Post</Dropdown.Item>
+      <Dropdown.Item eventKey="2" onClick={deletePost}>
+        Delete Post
+      </Dropdown.Item>
     </DropdownButton>
   );
 }
@@ -130,7 +169,7 @@ const ProfileArea = () => {
             user.posts.map((post) => (
               <>
                 <div className="w-100 d-flex justify-content-end">
-                  <OptionsDropDown />
+                  <OptionsDropDown post={post} />
                 </div>
                 <SinglePost key={post._id} post={post}>
                   <div className="d-flex justify-content-between align-items-center px-3">
